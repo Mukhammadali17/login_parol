@@ -17,3 +17,50 @@ my_cursor.execute("CREATE TABLE IF NOT EXISTS login_parol(id INT(6) UNSIGNED AUT
                   "age INT(3) NOT NULL,"
                   "login VARCHAR(30) NOT NULL,"
                   "password VARCHAR(30) NOT NULL)")
+
+
+class User:
+    def __init__(self):
+        pass
+
+    def menu(self):
+        pass
+
+    def choose(self):
+        pass
+
+    def sign_up(self):
+        pass
+
+    def log_in(self):
+        pass
+
+    def set(self):
+        pass
+
+    def login_exists(self):
+        pass
+
+    def update_login(self):
+        pass
+
+    def update_password(self):
+        pass
+
+    def log_out(self):
+        pass
+
+    def delete_account(self):
+        pass
+
+    def exit(self):
+        pass
+
+    def is_str_empty(self):
+        pass
+
+    def invalid_input(self):
+        pass
+
+    def clear(self):
+        pass
