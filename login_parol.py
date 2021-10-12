@@ -49,7 +49,8 @@ class User:
             self.log_in()
         else:
             self.exit()
-# _________________________________sign up_________________________________________________________
+
+    # _________________________________sign up_________________________________________________________
     def sign_up(self):
         # ______first_name___________
         self.clear()
@@ -74,7 +75,7 @@ class User:
             age = input("Enter your age: ").strip()
         # _____________login and password______________
         while True:
-            #_____logini
+            # _____logini
             self.clear()
             login = input("Enter your login: ").strip().lower()
             if not self.login_exists(login):
@@ -98,13 +99,62 @@ class User:
             print("You've created to system")
             self.menu()
 
-
-
+    # _______________________________________log_in__________________________________________
     def log_in(self):
-        pass
+        self.clear()
+        login_ = input("Enter your login: ").strip().lower()
+        my_cursor.execute(f"SELECT * from login_parol WHERE login = '{login_}'")
+        result = my_cursor.fetchall()
+        if not result:
+            self.clear()
+            print("I cant find this login")
+            self.log_in()
+        else:
+            self.clear()
+            current_password = result[0][5]
+            password_ = input("Enter your password: ").strip()
+            if password_ == current_password:
+                self.clear()
+                print("You've entered to system")
+                self.set()
+            else:
+                self.clear()
+                print("Password doesnt match")
+                self.log_in()
 
     def set(self):
-        pass
+        self.clear()
+        print("""
+        [1] Update login
+        [2] Update password
+        [3] log out
+        [4] Delete account
+        [5] Exit""")
+        settings_input = input("Choose one of them")
+        input_options = ['1','2','3','4','5']
+        while settings_input not in input_options:
+            self.clear()
+            self.invalid_input()
+            print("""
+                    [1] Update login
+                    [2] Update password
+                    [3] log out
+                    [4] Delete account
+                    [5] Exit""")
+            settings_input = input("Choose one of them")
+        if settings_input == '1':
+            self.update_login()
+        elif settings_input == '2':
+            self.update_password()
+        elif settings_input == '3':
+            self.log_out()
+        elif settings_input == '4':
+            self.delete_account()
+        else:
+            self.exit()
+
+
+
     @staticmethod
     def login_exists(logiin):
         my_cursor.execute(f"SELECT * FROM login_parol WHERE login = '{logiin}'")
@@ -144,5 +194,6 @@ class User:
             os.system("cls")
         else:
             print("Sorry ukam :)")
+
 
 user1 = User()
