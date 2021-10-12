@@ -72,16 +72,44 @@ class User:
             self.clear()
             self.invalid_input()
             age = input("Enter your age: ").strip()
-        
+        # _____________login and password______________
+        while True:
+            #_____logini
+            self.clear()
+            login = input("Enter your login: ").strip().lower()
+            if not self.login_exists(login):
+                while not login.isalnum():
+                    self.clear()
+                    self.invalid_input()
+                    login = input("Enter your login: ").strip().lower()
+            # _______passwordi
+            self.clear()
+            password = input("Enter your password: ").strip()
+            check_password = input("Confirm your password: ").strip()
+            while password != check_password:
+                self.clear()
+                self.invalid_input()
+                password = input("Enter your password: ").strip()
+                check_password = input("Confirm your password: ").strip()
+            # _______________databasega yozish parti__________________________________________
+            my_cursor.execute(f"INSERT INTO login_parol(first_name,last_name,age,login,password) VALUES"
+                              f"('{first_name}','{last_name}',{age},'{login}','{password}')")
+            my_db.commit()
+            print("You've created to system")
+            self.menu()
+
+
 
     def log_in(self):
         pass
 
     def set(self):
         pass
-
-    def login_exists(self):
-        pass
+    @staticmethod
+    def login_exists(logiin):
+        my_cursor.execute(f"SELECT * FROM login_parol WHERE login = '{logiin}'")
+        result = my_cursor.fetchall()
+        return result
 
     def update_login(self):
         pass
