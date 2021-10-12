@@ -138,7 +138,7 @@ class User:
         [3] log out
         [4] Delete account
         [5] Exit""")
-        settings_input = input("Choose one of them")
+        settings_input = input("Choose one of them: ")
         input_options = ['1','2','3','4','5']
         while settings_input not in input_options:
             self.clear()
@@ -193,7 +193,30 @@ class User:
 
 
     def update_password(self):
-        pass
+            self.clear()
+            current_password = input("Enter your password: ").strip()
+            while not current_password.isalnum():
+                self.clear()
+                self.invalid_input()
+                current_login = input("Enter your password: ").strip()
+            my_cursor.execute(f"SELECT password FROM login_parol WHERE password = '{current_password}'")
+            result = my_cursor.fetchall()
+            while result is None:
+                self.clear()
+                print("I cant find this password")
+                current_login = input("Enter your password: ").strip()
+                my_cursor.execute(f"SELECT password FROM login_parol WHERE password = '{current_password}'")
+                result = my_cursor.fetchall()
+            self.clear()
+            new_password = input("Enter your new password: ").strip()
+            while not new_password.isalnum():
+                self.clear()
+                self.invalid_input()
+                new_password = input("Enter your new password: ").strip()
+            my_cursor.execute(f"UPDATE login_parol SET password = '{new_password}' WHERE password = '{current_password}'")
+            my_db.commit()
+            self.clear()
+            self.set()
 
     def log_out(self):
         pass
