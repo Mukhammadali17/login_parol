@@ -58,7 +58,13 @@ class User:
             self.clear()
             self.invalid_input()
             first_name = input("Enter your first_name: ").strip().capitalize()
-        
+        # ______last_name__________
+        self.clear()
+        last_name = input("Enter your last_name: ").strip().capitalize()
+        while not last_name.isalpha():
+            self.clear()
+            self.invalid_input()
+            last_name = input("Enter your last_name: ").strip().capitalize()
 
     def log_in(self):
         pass
