@@ -103,6 +103,10 @@ class User:
     def log_in(self):
         self.clear()
         login_ = input("Enter your login: ").strip().lower()
+        while not login_.isalnum():
+            self.clear()
+            self.invalid_input()
+            login_ = input("Enter your login: ").strip().lower()
         my_cursor.execute(f"SELECT * from login_parol WHERE login = '{login_}'")
         result = my_cursor.fetchall()
         if not result:
@@ -113,6 +117,10 @@ class User:
             self.clear()
             current_password = result[0][5]
             password_ = input("Enter your password: ").strip()
+            while not password_.isalnum():
+                self.clear()
+                self.invalid_input()
+                password_ = input("Enter your password: ").strip().lower()
             if password_ == current_password:
                 self.clear()
                 print("You've entered to system")
@@ -141,7 +149,7 @@ class User:
                     [3] log out
                     [4] Delete account
                     [5] Exit""")
-            settings_input = input("Choose one of them")
+            settings_input = input("Choose one of them: ")
         if settings_input == '1':
             self.update_login()
         elif settings_input == '2':
@@ -162,7 +170,27 @@ class User:
         return result
 
     def update_login(self):
-        pass
+        self.clear()
+        current_login = input("Enter your login: ").strip().lower()
+        while not current_login.isalnum():
+            self.clear()
+            self.invalid_input()
+            current_login = input("Enter your login: ").strip().lower()
+        while not self.login_exists(current_login):
+            self.clear()
+            print("I cant find this login")
+            current_login = input("Enter your login: ").strip().lower()
+        self.clear()
+        new_login = input("Enter your new login: ").strip().lower()
+        while not new_login.isalnum():
+            self.clear()
+            self.invalid_input()
+            new_login = input("Enter your new login: ").strip().lower()
+        my_cursor.execute(f"UPDATE login_parol SET login = '{new_login}' WHERE login = '{current_login}'")
+        my_db.commit()
+        self.clear()
+        self.set()
+
 
     def update_password(self):
         pass
