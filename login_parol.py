@@ -65,6 +65,14 @@ class User:
             self.clear()
             self.invalid_input()
             last_name = input("Enter your last_name: ").strip().capitalize()
+        # _______age_______________
+        self.clear()
+        age = input("Enter your age: ").strip()
+        while not age.isnumeric():
+            self.clear()
+            self.invalid_input()
+            age = input("Enter your age: ").strip()
+        
 
     def log_in(self):
         pass
