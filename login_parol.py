@@ -49,9 +49,16 @@ class User:
             self.log_in()
         else:
             self.exit()
-
+# _________________________________sign up_________________________________________________________
     def sign_up(self):
-        pass
+        # ______first_name___________
+        self.clear()
+        first_name = input("Enter your first_name: ").strip().capitalize()
+        while not first_name.isalpha():
+            self.clear()
+            self.invalid_input()
+            first_name = input("Enter your first_name: ").strip().capitalize()
+        
 
     def log_in(self):
         pass
@@ -95,3 +102,5 @@ class User:
             os.system("cls")
         else:
             print("Sorry ukam :)")
+
+user1 = User()
