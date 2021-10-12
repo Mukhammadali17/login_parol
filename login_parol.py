@@ -21,13 +21,34 @@ my_cursor.execute("CREATE TABLE IF NOT EXISTS login_parol(id INT(6) UNSIGNED AUT
 
 class User:
     def __init__(self):
+        self.clear()
         self.menu()
 
     def menu(self):
-        pass
+        self.clear()
+        print("""
+        [1] Sign up
+        [2] Log in
+        [0] Exit  """)
+        self.choose()
 
     def choose(self):
-        pass
+        user_input = input("Please choose one of them: ").strip()
+        input_options = ['1', '2', '0']
+        while user_input not in input_options:
+            self.clear()
+            self.invalid_input()
+            print("""
+                    [1] Sign up
+                    [2] Log in
+                    [0] Exit  """)
+            user_input = input("Please choose one of them: ").strip()
+        if user_input == '1':
+            self.sign_up()
+        elif user_input == '2':
+            self.log_in()
+        else:
+            self.exit()
 
     def sign_up(self):
         pass
@@ -52,10 +73,12 @@ class User:
 
     def delete_account(self):
         pass
+
     @staticmethod
     def exit():
         print("Thank you bro")
         sys.exit()
+
     @staticmethod
     def is_str_empty(string):
         return not string
@@ -63,6 +86,7 @@ class User:
     @staticmethod
     def invalid_input():
         print("Invalid input. BRO please try again :)")
+
     @staticmethod
     def clear():
         if platform.system() == 'Linux':
