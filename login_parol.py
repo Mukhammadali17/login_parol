@@ -168,7 +168,7 @@ class User:
         my_cursor.execute(f"SELECT * FROM login_parol WHERE login = '{logiin}'")
         result = my_cursor.fetchall()
         return result
-
+# _______________________________update password_________________________________________________
     def update_login(self):
         self.clear()
         current_login = input("Enter your login: ").strip().lower()
@@ -191,7 +191,7 @@ class User:
         self.clear()
         self.set()
 
-
+# _______________________________update_password__________________________________________
     def update_password(self):
             self.clear()
             current_password = input("Enter your password: ").strip()
@@ -219,8 +219,8 @@ class User:
             self.set()
 
     def log_out(self):
-        pass
-
+        self.clear()
+        self.menu()
     def delete_account(self):
         pass
 
